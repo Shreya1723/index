@@ -1,67 +1,38 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SafarNow Trip Planner</title>
-    <link rel="stylesheet" href="style.css">
-</head>
-<body>
-    <!-- Navigation Bar -->
-    <div class="navbar">
-        <div class="navbar-left">
-            <div class="logo">SafarNow</div>
-            <nav>
-                <a href="#destinations">Destinations</a>
-                <a href="#packages">Packages</a>
-                <a href="#aboutus">About Us</a>
-            </nav>
-        </div>
-        <button class="login-btn">Login</button>
-    </div>
+document.addEventListener('DOMContentLoaded', () => {
+  // Dummy data for local testing
+  const dummyData = {
+    visitors: "45,892",
+    visitorsChange: "+12.3% from last month",
+    revenue: "128,750",
+    revenueChange: "+8.7% from last month",
+    orders: "1,250",
+    ordersChange: "+15.2% from last month",
+    conversion: "3.2",
+    conversionChange: "+2.4% from last month"
+  };
 
-    <!-- Hero and Form Section -->
-    <div class="hero">
-        <h1>Plan Your Next Trip</h1>
-        <form action="/plan-trip" method="POST" class="trip-form">
-            <div class="form-group">
-                <label for="from">From</label>
-                <input type="text" id="from" name="from" required placeholder="Enter origin">
-            </div>
+  // Populate metric cards with dummy data
+  document.getElementById('visitors').innerHTML = `
+    <h3>Total Visitors</h3>
+    <p>${dummyData.visitors}</p>
+    <small>${dummyData.visitorsChange}</small>
+  `;
 
-            <div class="form-group">
-                <label for="to">To</label>
-                <input type="text" id="to" name="to" required placeholder="Enter destination">
-            </div>
+  document.getElementById('revenue').innerHTML = `
+    <h3>Total Revenue</h3>
+    <p>$${dummyData.revenue}</p>
+    <small>${dummyData.revenueChange}</small>
+  `;
 
-            <div class="form-group">
-                <label for="travellers">Number of Travellers</label>
-                <div class="counter">
-                    <button type="button" id="minus">-</button>
-                    <input type="text" name="travellers" id="travellers" value="1" readonly>
-                    <button type="button" id="plus">+</button>
-                </div>
-            </div>
+  document.getElementById('orders').innerHTML = `
+    <h3>Total Orders</h3>
+    <p>${dummyData.orders}</p>
+    <small>${dummyData.ordersChange}</small>
+  `;
 
-            <button type="submit" class="plan-btn">Plan My Trip</button>
-        </form>
-    </div>
-
-    <!-- JS for form functionality -->
-    <script>
-        const incrementBtn = document.getElementById('plus');
-        const decrementBtn = document.getElementById('minus');
-        const travellerInput = document.getElementById('travellers');
-
-        incrementBtn.addEventListener('click', () => {
-            travellerInput.value = parseInt(travellerInput.value || 0) + 1;
-        });
-
-        decrementBtn.addEventListener('click', () => {
-            if (parseInt(travellerInput.value) > 1) {
-                travellerInput.value = parseInt(travellerInput.value) - 1;
-            }
-        });
-    </script>
-</body>
-</html>
+  document.getElementById('conversion').innerHTML = `
+    <h3>Conversion Rate</h3>
+    <p>${dummyData.conversion}%</p>
+    <small>${dummyData.conversionChange}</small>
+  `;
+});
